@@ -7,6 +7,8 @@ import (
 	"os"
 	"strings"
 	"time"
+
+	"github.com/briandowns/spinner"
 )
 
 func main() {
@@ -52,11 +54,16 @@ func getArgCommand(command string) {
 		fmt.Println("Please provide a valid argument. Use `kwctl help` for a list of valid arguments/commands.")
 	}
 }
-func initializeKwill(){
+func initializeKwill() {
+	s := spinner.New(spinner.CharSets[25], 100*time.Millisecond) // Build our new spinner
+	s.Color("red")                                               // Set the spinner color to red
+	s.Start()                                                    // Start the spinner
+	time.Sleep(5 * time.Second)                                  // Run for some time to simulate work
 	fmt.Println("Booting Custom Knowledge Worker Subroutines...")
-	time.Sleep(2 * time.Second)
+	time.Sleep(4 * time.Second)
 	fmt.Println("Loading Zion Lattice Interface...")
-	time.Sleep(2 * time.Second)
+	time.Sleep(4 * time.Second)
 	fmt.Println("Boot sequence Complete...")
+	s.Stop()
 	fmt.Println("Welcome Kwi-II.  Commands are now accessible via kwctl interface.")
 }
