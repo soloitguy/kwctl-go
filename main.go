@@ -37,11 +37,8 @@ func getArgCommand(command string) {
 		text, _ := reader.ReadString('\n')
 		text = strings.Replace(text, "\n", "", -1)
 		text = strings.ToLower(text)
-		if strings.Contains(text, "zion") {
-			fmt.Println("The Zion Lattice Interface is Blocked for now")
-		} else {
-			fmt.Println("Error accessing database.")
-		}
+		queried := text
+		answerQuery(queried)
 	case "init":
 		initializeKwill()
 	case "hello":
@@ -61,11 +58,11 @@ func initializeKwill() {
 	s := spinner.New(spinner.CharSets[25], 100*time.Millisecond) // Build our new spinner
 	s.Color("red")                                               // Set the spinner color to red
 	s.Start()                                                    // Start the spinner
-	time.Sleep(5 * time.Second)                                  // Run for some time to simulate work
+	time.Sleep(3 * time.Second)                                  // Run for some time to simulate work
 	fmt.Println("Booting Custom Knowledge Worker Subroutines...")
-	time.Sleep(4 * time.Second)
+	time.Sleep(2 * time.Second)
 	fmt.Println("Loading Zion Lattice Interface...")
-	time.Sleep(4 * time.Second)
+	time.Sleep(2 * time.Second)
 	fmt.Println("Boot sequence Complete...")
 	s.Stop()
 	fmt.Println("Welcome Kwi-II.  Commands are now accessible via kwctl interface.")
@@ -84,5 +81,11 @@ func openPrompt() {
 	} else {
 		getArgCommand(command)
 	}
-
+}
+func answerQuery(queried string) {
+	if strings.Contains(queried, "zion") {
+		fmt.Println("The Zion Lattice Interface is Blocked for now")
+	} else {
+		fmt.Println("Error accessing database.")
+	}
 }
