@@ -50,9 +50,12 @@ func getArgCommand(command string) {
 		fmt.Println("Not sure what to say")
 	case "help":
 		fmt.Println(help)
+	case "exit":
+		os.Exit(0)
 	default:
 		fmt.Println("Please provide a valid argument. Use `kwctl help` for a list of valid arguments/commands.")
 	}
+	openPrompt()
 }
 func initializeKwill() {
 	s := spinner.New(spinner.CharSets[25], 100*time.Millisecond) // Build our new spinner
@@ -66,4 +69,20 @@ func initializeKwill() {
 	fmt.Println("Boot sequence Complete...")
 	s.Stop()
 	fmt.Println("Welcome Kwi-II.  Commands are now accessible via kwctl interface.")
+	openPrompt()
+}
+func openPrompt() {
+	fmt.Print("$ kw_user/~ > ")
+	reader := bufio.NewReader(os.Stdin)
+	text, _ := reader.ReadString('\n')
+	text = strings.Replace(text, "\n", "", -1)
+	text = strings.ToLower(text)
+	command := text
+	if command == "init" {
+		fmt.Println("Knowledge Worker control interface already active.")
+		openPrompt()
+	} else {
+		getArgCommand(command)
+	}
+
 }
